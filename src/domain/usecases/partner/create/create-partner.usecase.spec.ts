@@ -38,6 +38,7 @@ const MockRepository = () => ({
   savePartner: jest
     .fn()
     .mockImplementation((partner: Partner) => Promise.resolve(partner)),
+  searchNearestPartner: jest.fn(),
 });
 
 describe("Create Partner unit tests", () => {

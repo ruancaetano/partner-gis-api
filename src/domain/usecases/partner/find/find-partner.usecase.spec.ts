@@ -38,6 +38,7 @@ const MockRepository = () => {
     mockedPartners,
     findPartner: jest.fn().mockReturnValue(Promise.resolve(mockedPartners[0])),
     savePartner: jest.fn(),
+    searchNearestPartner: jest.fn()
   };
 };
 
