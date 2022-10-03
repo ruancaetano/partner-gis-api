@@ -3,7 +3,8 @@
   "extends": ["tslint:recommended"],
   "jsRules": {},
   "rules": {
-    "variable-name": [false]
+    "variable-name": [false],
+    "no-unused-expression": [false]
   },
   "rulesDirectory": []
 }
