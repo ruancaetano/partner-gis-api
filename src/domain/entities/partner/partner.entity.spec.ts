@@ -35,7 +35,7 @@ const createPartnerMock = () => ({
   },
 });
 
-describe("Partner entity", () => {
+describe("Partner entity unit tests", () => {
   it("should return partner", () => {
     const partnerMock = createPartnerMock();
 
