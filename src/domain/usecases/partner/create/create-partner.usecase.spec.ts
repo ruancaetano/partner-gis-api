@@ -34,6 +34,7 @@ const createPartnerMock = () => ({
 });
 
 const MockRepository = () => ({
+  findPartner: jest.fn(),
   savePartner: jest
     .fn()
     .mockImplementation((partner: Partner) => Promise.resolve(partner)),
