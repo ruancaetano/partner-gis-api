@@ -20,4 +20,22 @@ export class PartnerFactory {
       new Address(addressCoordinates)
     );
   }
+
+  static createWithId(
+    id: string,
+    tradingName: string,
+    ownerName: string,
+    document: string,
+    coverageAreaCoordinates: number[][][][],
+    addressCoordinates: number[]
+  ) {
+    return new Partner(
+      id,
+      tradingName,
+      ownerName,
+      document,
+      new CoverageArea(coverageAreaCoordinates),
+      new Address(addressCoordinates)
+    );
+  }
 }
