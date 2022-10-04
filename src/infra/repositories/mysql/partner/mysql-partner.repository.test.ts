@@ -1,17 +1,12 @@
+import { PartnerFactory } from "@domain/partner/factories/partner.factory";
 import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { MysqlPartnerEntity } from "@infra/repositories/mysql/partner/mysql-partner.entity";
 import { MysqlPartnerRepository } from "@infra/repositories/mysql/partner/mysql-partner.repository";
-import { PartnerFactory } from "@domain/partner/factories/partner.factory";
-import { SearchNearestPartnerUseCase } from "./search-nearest-partner.usecase";
 import { getPartnerMock } from "@mocks/partner/get-partner.mock";
 
-describe("Search Nearest partner use case integration test", () => {
+describe("Mysql partner repository integration test", () => {
   beforeAll(async () => {
     await mysqlDatabase.connect();
-    await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
-  });
-
-  afterEach(async () => {
     await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
   });
 
@@ -24,10 +19,52 @@ describe("Search Nearest partner use case integration test", () => {
     await mysqlDatabase.disconnect();
   });
 
-  describe("Integrated with mysql repository", () => {
+  describe("Create partner", () => {
+    it("should create a new partner", async () => {
+      const partnerRepository = new MysqlPartnerRepository();
+
+      const inputMock = getPartnerMock();
+
+      const partner = await partnerRepository.savePartner(inputMock);
+
+      expect(partner).toEqual(partner);
+    });
+  });
+
+  describe("Find partner", () => {
+    it("should find a partner", async () => {
+      const partnerRepository = new MysqlPartnerRepository();
+
+      const partnerMock = getPartnerMock();
+      const partner = PartnerFactory.create(
+        partnerMock.tradingName,
+        partnerMock.ownerName,
+        partnerMock.document,
+        partnerMock.coverageArea.coordinates,
+        partnerMock.address.coordinates
+      );
+
+      await expect(
+        partnerRepository.savePartner(partner)
+      ).resolves.not.toThrowError();
+
+      const foundPartner = await partnerRepository.findPartner(partner.id);
+
+      expect(foundPartner).toEqual(partner);
+    });
+
+    it("should not found a partner", async () => {
+      const partnerRepository = new MysqlPartnerRepository();
+
+      await expect(partnerRepository.findPartner("invalid id")).rejects.toThrow(
+        "Partner not found"
+      );
+    });
+  });
+
+  describe("Search nearest partner", () => {
     it("should return nearest partner", async () => {
       const partnerRepository = new MysqlPartnerRepository();
-      const usecase = new SearchNearestPartnerUseCase(partnerRepository);
 
       const partnerMock1 = getPartnerMock();
       const partner1 = PartnerFactory.create(
@@ -54,44 +91,26 @@ describe("Search Nearest partner use case integration test", () => {
         ])
       ).resolves.not.toThrowError();
 
-      const foundPartner1 = await usecase.execute({
-        latitude: -43.297337,
-        longitude: -23.013538,
-      });
+      const foundPartner1 = await partnerRepository.searchNearestPartner(
+        -43.297337,
+        -23.013538
+      );
 
-      expect(foundPartner1).toEqual({
-        id: partner1.id,
-        tradingName: partnerMock1.tradingName,
-        ownerName: partnerMock1.ownerName,
-        document: partnerMock1.document.trim().replace(/(\.|\/)/g, ""),
-        coverageArea: partnerMock1.coverageArea,
-        address: partnerMock1.address,
-      });
+      expect(foundPartner1).toEqual(partner1);
 
-      const foundPartner2 = await usecase.execute({
-        latitude: -49.3342,
-        longitude: -25.38099,
-      });
+      const foundPartner2 = await partnerRepository.searchNearestPartner(
+        -49.3342,
+        -25.38099
+      );
 
-      expect(foundPartner2).toEqual({
-        id: partner2.id,
-        tradingName: partnerMock2.tradingName,
-        ownerName: partnerMock2.ownerName,
-        document: partnerMock2.document.trim().replace(/(\.|\/)/g, ""),
-        coverageArea: partnerMock2.coverageArea,
-        address: partnerMock2.address,
-      });
+      expect(foundPartner2).toEqual(partner2);
     });
 
     it("should not found a partner", async () => {
       const partnerRepository = new MysqlPartnerRepository();
-      const usecase = new SearchNearestPartnerUseCase(partnerRepository);
 
       await expect(async () => {
-        await usecase.execute({
-          latitude: 0,
-          longitude: 0,
-        });
+        await partnerRepository.searchNearestPartner(0, 0);
       }).rejects.toThrow("Partner not found");
     });
   });

@@ -11,6 +11,10 @@ describe("Create partner use case integration test", () => {
     await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
   });
 
+  afterEach(async () => {
+    await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
+  });
+
   afterAll(async () => {
     await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
     await mysqlDatabase.disconnect();
