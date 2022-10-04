@@ -20,7 +20,7 @@ export class Partner {
     this._id = id;
     this._tradingName = tradingName;
     this._ownerName = ownerName;
-    this._document = document;
+    this._document = (document || "").trim().replace(/(\.|\/)/g, "");
     this._coverageArea = coverageArea;
     this._address = address;
 
@@ -64,7 +64,7 @@ export class Partner {
       throw new Error("Owner name is required");
     }
 
-    if (!/[0-9]{13}\/[0-9]{4}/.test(this._document)) {
+    if (!/([0-9]{14})|([0-9]{11})/.test(this._document)) {
       throw new Error("Document is invalid");
     }
 

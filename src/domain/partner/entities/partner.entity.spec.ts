@@ -1,43 +1,11 @@
+import { getPartnerMock } from "@mocks/partner/get-partner.mock";
 import { Address } from "./address";
 import { CoverageArea } from "./coverage-area";
 import { Partner } from "./partner.entity";
 
-const createPartnerMock = () => ({
-  id: "id",
-  tradingName: "Adega da Cerveja - Pinheiros",
-  ownerName: "Zé da Silva",
-  document: "1432132123891/0001",
-  coverageArea: {
-    type: "MultiPolygon",
-    coordinates: [
-      [
-        [
-          [30, 20],
-          [45, 40],
-          [10, 40],
-          [30, 20],
-        ],
-      ],
-      [
-        [
-          [15, 5],
-          [40, 10],
-          [10, 20],
-          [5, 10],
-          [15, 5],
-        ],
-      ],
-    ],
-  },
-  address: {
-    type: "Point",
-    coordinates: [-46.57421, -21.785741],
-  },
-});
-
 describe("Partner entity unit tests", () => {
   it("should return partner", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     const partner = new Partner(
       partnerMock.id,
@@ -51,7 +19,9 @@ describe("Partner entity unit tests", () => {
     expect(partner.id).toBe(partnerMock.id);
     expect(partner.tradingName).toBe(partnerMock.tradingName);
     expect(partner.ownerName).toBe(partnerMock.ownerName);
-    expect(partner.document).toBe(partnerMock.document);
+    expect(partner.document).toBe(
+      partnerMock.document.trim().replace(/(\.|\/)/g, "")
+    );
 
     expect(partner.coverageArea.type).toBe(partnerMock.coverageArea.type);
     expect(partner.coverageArea.coordinates).toEqual(
@@ -65,7 +35,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error if id is empty", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
@@ -80,7 +50,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error trading name is empty", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
@@ -95,7 +65,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error owner name is empty", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
@@ -110,7 +80,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error if document is invalid", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
@@ -136,7 +106,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error if coverage area is empty", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
@@ -151,7 +121,7 @@ describe("Partner entity unit tests", () => {
   });
 
   it("should throw an error if address is empty", () => {
-    const partnerMock = createPartnerMock();
+    const partnerMock = getPartnerMock();
 
     expect(() => {
       new Partner(
