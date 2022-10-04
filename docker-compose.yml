@@ -2,7 +2,7 @@ version: "3"
 
 services:
   database:
-    image: mysql:8.0.30
+    image: mysql:latest
     command: mysqld --default-authentication-plugin=mysql_native_password
     container_name: partner-gis-database
     ports:
