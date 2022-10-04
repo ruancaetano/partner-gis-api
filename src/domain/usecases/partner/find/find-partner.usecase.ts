@@ -1,4 +1,3 @@
-import { PartnerFactory } from "../../../factories/partner/partner.factory";
 import { PartnerRepositoryInterface } from "../../../repositories/partner/partner.repository";
 import {
   InputFindPartnerUseCaseDto,
@@ -13,7 +12,7 @@ export class FindPartnerUseCase {
   ): Promise<OutputFindPartnerUseCaseDto> {
     const partner = await this.partnerReposity.findPartner(input.id);
 
-    if(!partner) {
+    if (!partner) {
       throw new Error("Partner not found");
     }
 

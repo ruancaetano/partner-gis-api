@@ -38,11 +38,11 @@ const createPartnerMock = () => ({
 describe("Create partner use case integration test", () => {
   beforeAll(async () => {
     await mysqlDatabase.connect();
-
     await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
   });
 
   afterAll(async () => {
+    await mysqlDatabase.clearEntityRepository(MysqlPartnerEntity);
     await mysqlDatabase.disconnect();
   });
 

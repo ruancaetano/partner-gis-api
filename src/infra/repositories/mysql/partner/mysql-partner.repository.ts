@@ -1,3 +1,4 @@
+import { PartnerFactory } from "@domain/factories/partner/partner.factory";
 import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { Repository } from "typeorm";
 import { Partner } from "../../../../domain/entities/partner/partner.entity";
@@ -17,6 +18,7 @@ export class MysqlPartnerRepository implements PartnerRepositoryInterface {
       .createQueryBuilder()
       .insert()
       .values({
+        id: partner.id,
         tradingName: partner.tradingName,
         ownerName: partner.ownerName,
         document: partner.document,
@@ -34,8 +36,32 @@ export class MysqlPartnerRepository implements PartnerRepositoryInterface {
       .execute();
   }
 
-  findPartner(id: string): Promise<Partner> {
-    throw new Error("Method not implemented.");
+  async findPartner(id: string): Promise<Partner> {
+    const result = await this.repository
+      .createQueryBuilder()
+      .select([
+        "id as id",
+        "trading_name as tradingName",
+        "owner_name as ownerName",
+        "document as document",
+        "ST_AsGeoJSON(coverage_area) as coverageArea",
+        "ST_AsGeoJSON(address) as address",
+      ])
+      .where("id = :id", { id })
+      .getRawOne();
+
+    if (!result) {
+      throw new Error("Partner not found");
+    }
+
+    return PartnerFactory.createWithId(
+      result.id,
+      result.tradingName,
+      result.ownerName,
+      result.document,
+      JSON.parse(result.coverageArea).coordinates || [],
+      JSON.parse(result.address).coordinates || []
+    );
   }
 
   searchNearestPartner(latitude: number, longitude: number): Promise<Partner> {
