@@ -64,7 +64,41 @@ export class MysqlPartnerRepository implements PartnerRepositoryInterface {
     );
   }
 
-  searchNearestPartner(latitude: number, longitude: number): Promise<Partner> {
-    throw new Error("Method not implemented.");
+  async searchNearestPartner(
+    latitude: number,
+    longitude: number
+  ): Promise<Partner> {
+    const inputAsGeom = `ST_GeomFromGeoJSON('${JSON.stringify({
+      type: "Point",
+      coordinates: [latitude, longitude],
+    })}')`;
+
+    const result = await this.repository
+      .createQueryBuilder()
+      .select([
+        "id as id",
+        "trading_name as tradingName",
+        "owner_name as ownerName",
+        "document as document",
+        "ST_AsGeoJSON(coverage_area) as coverageArea",
+        "ST_AsGeoJSON(address) as address",
+        `ST_Distance(address, ${inputAsGeom}) as distance`,
+      ])
+      .where(`ST_Contains(coverage_area, ${inputAsGeom}) = 1`)
+      .orderBy("distance", "ASC")
+      .getRawOne();
+
+    if (!result) {
+      throw new Error("Partner not found");
+    }
+
+    return PartnerFactory.createWithId(
+      result.id,
+      result.tradingName,
+      result.ownerName,
+      result.document,
+      JSON.parse(result.coverageArea).coordinates || [],
+      JSON.parse(result.address).coordinates || []
+    );
   }
 }

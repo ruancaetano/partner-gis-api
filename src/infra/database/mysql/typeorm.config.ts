@@ -9,7 +9,7 @@ export default {
   password: "development",
   database:
     process.env.NODE_ENV === "test" ? "partner-gis-test" : "partner-gis",
-  logging: true,
+  logging: process.env.NODE_ENV === "development",
   namingStrategy: new SnakeNamingStrategy(),
   entities: [
     resolve(
