@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 
@@ -10,7 +10,9 @@ import {
   name: "partners",
 })
 export class MysqlPartnerEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryColumn({
+    type: "uuid",
+  })
   id: string;
 
   @CreateDateColumn()
