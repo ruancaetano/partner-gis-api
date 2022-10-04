@@ -1,5 +1,5 @@
-import { PartnerFactory } from "../../../factories/partner/partner.factory";
-import { PartnerRepositoryInterface } from "../../../repositories/partner/partner.repository";
+import { PartnerFactory } from "../../factories/partner.factory";
+import { PartnerRepositoryInterface } from "../../repositories/partner.repository";
 import {
   InputCreatePartnerUseCaseDto,
   OutputCreatePartnerUseCaseDto,

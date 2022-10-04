@@ -1,8 +1,8 @@
-import { PartnerFactory } from "@domain/factories/partner/partner.factory";
-import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { Repository } from "typeorm";
-import { Partner } from "../../../../domain/entities/partner/partner.entity";
-import { PartnerRepositoryInterface } from "../../../../domain/repositories/partner/partner.repository";
+import { Partner } from "@domain/partner/entities/partner.entity";
+import { PartnerFactory } from "@domain/partner/factories/partner.factory";
+import { PartnerRepositoryInterface } from "@domain/partner/repositories/partner.repository";
+import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { MysqlPartnerEntity } from "./mysql-partner.entity";
 
 export class MysqlPartnerRepository implements PartnerRepositoryInterface {

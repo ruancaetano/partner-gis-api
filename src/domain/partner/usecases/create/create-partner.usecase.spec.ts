@@ -1,4 +1,4 @@
-import { Partner } from "../../../entities/partner/partner.entity";
+import { Partner } from "@domain/partner/entities/partner.entity";
 import { CreatePartnerUseCase } from "./create-partner.usecase";
 
 const createPartnerMock = () => ({

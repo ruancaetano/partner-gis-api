@@ -1,4 +1,4 @@
-import { PartnerRepositoryInterface } from "../../../repositories/partner/partner.repository";
+import { PartnerRepositoryInterface } from "../../../partner/repositories/partner.repository";
 import {
   InputSearchNearestPartnerUseCaseDto,
   OutputSearchNearestPartnerUseCaseDto,

@@ -1,7 +1,7 @@
 import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { MysqlPartnerEntity } from "@infra/repositories/mysql/partner/mysql-partner.entity";
 import { MysqlPartnerRepository } from "@infra/repositories/mysql/partner/mysql-partner.repository";
-import { PartnerFactory } from "@domain/factories/partner/partner.factory";
+import { PartnerFactory } from "@domain/partner/factories/partner.factory";
 import { FindPartnerUseCase } from "./find-partner.usecase";
 
 const createPartnerMock = () => ({

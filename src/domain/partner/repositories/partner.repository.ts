@@ -1,4 +1,5 @@
-import { Partner } from "../../entities/partner/partner.entity";
+import { Partner } from "../entities/partner.entity";
+
 
 export interface PartnerRepositoryInterface {
   findPartner(id: string): Promise<Partner>;

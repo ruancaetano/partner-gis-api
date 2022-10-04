@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
-import { Address } from "../../entities/partner/address";
-import { CoverageArea } from "../../entities/partner/coverage-area";
-import { Partner } from "../../entities/partner/partner.entity";
+import { Address } from "../entities/address";
+import { CoverageArea } from "../entities/coverage-area";
+import { Partner } from "../entities/partner.entity";
 
 export class PartnerFactory {
   static create(
