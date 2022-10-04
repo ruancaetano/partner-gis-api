@@ -7,7 +7,8 @@ export default {
   port: 3306,
   username: "root",
   password: "development",
-  database: "partner-gis",
+  database:
+    process.env.NODE_ENV === "test" ? "partner-gis-test" : "partner-gis",
   logging: true,
   namingStrategy: new SnakeNamingStrategy(),
   entities: [
