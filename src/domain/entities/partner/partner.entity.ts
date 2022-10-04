@@ -14,15 +14,15 @@ export class Partner {
     tradingName: string,
     ownerName: string,
     document: string,
-    coverageAreaCoordinates: CoverageArea,
-    addressCoordinates: Address
+    coverageArea: CoverageArea,
+    address: Address
   ) {
     this._id = id;
     this._tradingName = tradingName;
     this._ownerName = ownerName;
     this._document = document;
-    this._coverageArea = coverageAreaCoordinates;
-    this._address = addressCoordinates;
+    this._coverageArea = coverageArea;
+    this._address = address;
 
     this.validate();
   }
