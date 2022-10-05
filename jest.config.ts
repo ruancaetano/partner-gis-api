@@ -89,15 +89,15 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '^@infra/(.*)$': '<rootDir>/src/infra/$1',
-    '^@presenter/(.*)$': '<rootDir>/src/presenter/$1',
-    '^@application/(.*)$': '<rootDir>/src/application/$1',
-    '^@mocks/(.*)$': '<rootDir>/mocks/$1',
+    "^@domain/(.*)$": "<rootDir>/src/domain/$1",
+    "^@infra/(.*)$": "<rootDir>/src/infra/$1",
+    "^@presenter/(.*)$": "<rootDir>/src/presenter/$1",
+    "^@application/(.*)$": "<rootDir>/src/application/$1",
+    "^@mocks/(.*)$": "<rootDir>/mocks/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
-  // modulePathIgnorePatterns: [],
+  modulePathIgnorePatterns: ["<rootDir>/jest.config.e2e.ts"],
 
   // Activates notifications for test results
   // notify: false,
@@ -127,7 +127,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: './',
+  rootDir: "./",
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
@@ -161,7 +161,7 @@ export default {
   // The glob patterns Jest uses to detect test files
   testMatch: [
     "**/__tests__/**/*.[t]s?(x)",
-    "**/?(*.)+(spec|test).[t]s?(x)"
+    "**/?(*.)+(spec|test|e2e).[t]s?(x)",
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
