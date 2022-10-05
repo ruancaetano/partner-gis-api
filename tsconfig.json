@@ -107,8 +107,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "src/**/*.ts",
-    "src/application/express/__tests__/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules/**",

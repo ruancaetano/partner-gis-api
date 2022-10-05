@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-
-app.use(partnerRoutes)
+app.use(partnerRoutes);
 
 export default app;
