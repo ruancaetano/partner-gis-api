@@ -21,9 +21,24 @@ export default {
       "**",
       "*.entity.ts"
     ),
+    resolve(
+      __dirname,
+      "..",
+      "..",
+      "repositories",
+      "mysql",
+      "**",
+      "*.entity.js"
+    ),
   ],
-  migrations: [resolve(__dirname, "migrations", "*.ts")],
-  seeds: [resolve(__dirname, "seeds", "*.ts")],
+  migrations: [
+    resolve(__dirname, "migrations", "*.ts"),
+    resolve(__dirname, "migrations", "*.js"),
+  ],
+  seeds: [
+    resolve(__dirname, "seeds", "*.js"),
+    resolve(__dirname, "seeds", "*.js"),
+  ],
   cli: {
     migrationsDir: resolve(__dirname, "migrations"),
     seedsDir: [resolve(__dirname, "seeds")],

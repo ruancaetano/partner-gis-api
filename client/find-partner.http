@@ -1,0 +1,2 @@
+GET http://localhost:3000/partners/cbc45bbc-12ce-4036-96e8-1c935aacc075
+Content-Type: application/json

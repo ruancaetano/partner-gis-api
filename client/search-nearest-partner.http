@@ -1,0 +1,2 @@
+GET http://localhost:3000/partners/search-nearest?latitude=-43.297337&longitude=-23.013531
+Content-Type: application/json

@@ -5,7 +5,8 @@
   "rules": {
     "variable-name": [false],
     "class-name": [false],
-    "no-unused-expression": [false]
+    "no-unused-expression": [false],
+    "no-console": [false]
   },
   "rulesDirectory": []
 }
