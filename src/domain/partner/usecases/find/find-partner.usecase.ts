@@ -1,3 +1,4 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 import { PartnerRepositoryInterface } from "../../../partner/repositories/partner.repository";
 import {
   InputFindPartnerUseCaseDto,
@@ -13,7 +14,7 @@ export class FindPartnerUseCase {
     const partner = await this.partnerReposity.findPartner(input.id);
 
     if (!partner) {
-      throw new Error("Partner not found");
+      throw new ValidationError("Partner not found");
     }
 
     return {

@@ -1,3 +1,5 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
+
 export class CoverageArea {
   private _type: string;
   private _coordinates: number[][][][];
@@ -17,7 +19,7 @@ export class CoverageArea {
 
   private validate() {
     if (!this._coordinates.length) {
-      throw new Error("Coordinates cannot be empty");
+      throw new ValidationError("Coordinates cannot be empty");
     }
   }
 }

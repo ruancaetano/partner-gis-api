@@ -1,3 +1,4 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 import { PartnerRepositoryInterface } from "../../../partner/repositories/partner.repository";
 import {
   InputSearchNearestPartnerUseCaseDto,
@@ -16,7 +17,7 @@ export class SearchNearestPartnerUseCase {
     );
 
     if (!partner) {
-      throw new Error("No partners found near this location");
+      throw new ValidationError("No partners found near this location");
     }
 
     return {

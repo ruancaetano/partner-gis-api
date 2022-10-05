@@ -1,3 +1,4 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 import { Partner } from "@domain/partner/entities/partner.entity";
 import { getPartnerMock } from "@mocks/partner/get-partner.mock";
 import { CreatePartnerUseCase } from "./create-partner.usecase";
@@ -29,7 +30,7 @@ describe("Create Partner unit tests", () => {
   it("should throw an error if fails", async () => {
     const partnerRepository = MockRepository();
     partnerRepository.savePartner.mockImplementationOnce(() => {
-      throw new Error("Connection error");
+      throw new ValidationError("Connection error");
     });
 
     const usecase = new CreatePartnerUseCase(partnerRepository);

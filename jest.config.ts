@@ -91,6 +91,8 @@ export default {
   moduleNameMapper: {
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
     '^@infra/(.*)$': '<rootDir>/src/infra/$1',
+    '^@presenter/(.*)$': '<rootDir>/src/presenter/$1',
+    '^@application/(.*)$': '<rootDir>/src/application/$1',
     '^@mocks/(.*)$': '<rootDir>/mocks/$1',
   },
 

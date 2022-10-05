@@ -1,3 +1,4 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 import { getPartnerMock } from "@mocks/partner/get-partner.mock";
 import { FindPartnerUseCase } from "./find-partner.usecase";
 
@@ -30,7 +31,7 @@ describe("Find Partner unit tests", () => {
   it("should throw an error if user not found", async () => {
     const partnerRepository = MockRepository();
     partnerRepository.findPartner.mockImplementationOnce(() => {
-      throw new Error("Partner not found");
+      throw new ValidationError("Partner not found");
     });
 
     const usecase = new FindPartnerUseCase(partnerRepository);

@@ -1,3 +1,4 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 import { Address } from "./address";
 import { CoverageArea } from "./coverage-area";
 
@@ -53,27 +54,27 @@ export class Partner {
 
   private validate() {
     if (!this._id) {
-      throw new Error("Id is required");
+      throw new ValidationError("Id is required");
     }
 
     if (!this._tradingName) {
-      throw new Error("Trading name is required");
+      throw new ValidationError("Trading name is required");
     }
 
     if (!this._ownerName) {
-      throw new Error("Owner name is required");
+      throw new ValidationError("Owner name is required");
     }
 
     if (!/([0-9]{14})|([0-9]{11})/.test(this._document)) {
-      throw new Error("Document is invalid");
+      throw new ValidationError("Document is invalid");
     }
 
     if (!this._coverageArea) {
-      throw new Error("Coverage area is required");
+      throw new ValidationError("Coverage area is required");
     }
 
     if (!this._address) {
-      throw new Error("Address is required");
+      throw new ValidationError("Address is required");
     }
   }
 }

@@ -4,6 +4,7 @@ import { PartnerFactory } from "@domain/partner/factories/partner.factory";
 import { PartnerRepositoryInterface } from "@domain/partner/repositories/partner.repository";
 import { mysqlDatabase } from "@infra/database/mysql/mysql.connection";
 import { MysqlPartnerEntity } from "./mysql-partner.entity";
+import { ValidationError } from "@domain/@shared/errors/validation.error";
 
 export class MysqlPartnerRepository implements PartnerRepositoryInterface {
   private repository: Repository<MysqlPartnerEntity>;
@@ -51,7 +52,7 @@ export class MysqlPartnerRepository implements PartnerRepositoryInterface {
       .getRawOne();
 
     if (!result) {
-      throw new Error("Partner not found");
+      throw new ValidationError("Partner not found");
     }
 
     return PartnerFactory.createWithId(
@@ -89,7 +90,7 @@ export class MysqlPartnerRepository implements PartnerRepositoryInterface {
       .getRawOne();
 
     if (!result) {
-      throw new Error("Partner not found");
+      throw new ValidationError("Partner not found");
     }
 
     return PartnerFactory.createWithId(

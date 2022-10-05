@@ -1,3 +1,5 @@
+import { ValidationError } from "@domain/@shared/errors/validation.error";
+
 export class Address {
   private _type: "Point";
   private _coordinates: number[];
@@ -19,7 +21,7 @@ export class Address {
 
   private validate() {
     if (!this._coordinates.length) {
-      throw new Error("Coordinates cannot be empty");
+      throw new ValidationError("Coordinates cannot be empty");
     }
   }
 }

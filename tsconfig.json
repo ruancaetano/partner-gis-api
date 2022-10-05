@@ -32,6 +32,8 @@
     "paths": {
       "@infra/*": ["./src/infra/*"],
       "@domain/*": ["./src/domain/*"],
+      "@presentation/*": ["./src/presentation/*"],
+      "@application/*": ["./src/application/*"],
       "@mocks/*": ["./mocks/*"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
@@ -105,7 +107,8 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/application/express/__tests__/**/*.ts"
   ],
   "exclude": [
     "node_modules/**",
