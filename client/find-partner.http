@@ -1,2 +1,2 @@
-GET http://localhost:3000/partners/cbc45bbc-12ce-4036-96e8-1c935aacc075
+GET http://localhost:3000/partners/c2d29735-a0db-48ad-ab9f-a61c88c9696c
 Content-Type: application/json

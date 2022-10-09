@@ -1,14 +1,14 @@
 import { resolve } from "path";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
+const database = process.env.DB_DATABASE || "partner-gis";
 export default {
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "development",
-  database:
-    process.env.NODE_ENV === "test" ? "partner-gis-test" : "partner-gis",
+  host: process.env.DB_HOSTNAME || "localhost",
+  port: process.env.DB_PORT || 3306,
+  username: process.env.DB_USERNAME || "root",
+  password: process.env.DB_PASSWORD || "development",
+  database: process.env.NODE_ENV === "test" ? `${database}-test` : database,
   logging: process.env.NODE_ENV === "development",
   namingStrategy: new SnakeNamingStrategy(),
   entities: [

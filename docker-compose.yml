@@ -10,3 +10,18 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: development
       MYSQL_DATABASE: partner-gis
+
+  app:
+    build:
+      context: ./
+    container_name: partner-gis-server
+    command: /bin/sh -c "./wait && yarn start"
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.development
+    environment:
+      WAIT_HOSTS: database:3306
+      WAIT_TIMEOUT: 60
+    depends_on:
+      - database
