@@ -1,4 +1,4 @@
-import { CreatePartnerController } from "@application/controllers/create-partner.controller";
+import { CreatePartnerController } from "@presentation/controllers/create-partner.controller";
 import { CreatePartnerUseCase } from "@domain/partner/usecases/create/create-partner.usecase";
 import { MysqlPartnerRepository } from "@infra/repositories/mysql/partner/mysql-partner.repository";
 

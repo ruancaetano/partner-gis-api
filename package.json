@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc && resolve-tspaths",
-    "start": "node ./dist/src/application/express/server.js",
+    "start": "node ./dist/src/main/server.js",
     "lint": "tslint src/**/*.ts{,x}",
     "lint:fix": "tslint src/**/*.ts{,x} --fix",
     "prepare": "husky install",
@@ -26,7 +26,8 @@
     "typeorm:migration:revert": "yarn typeorm:cli migration:revert",
     "typeorm:seed:config": "yarn typeorm:seed:cli config",
     "typeorm:seed:run": "yarn typeorm:seed:cli seed",
-    "setup:dev": "yarn typeorm:db:drop && yarn typeorm:migration:run && yarn typeorm:seed:run"
+    "setup:dev": "yarn typeorm:db:drop && yarn typeorm:migration:run && yarn typeorm:seed:run",
+    "setup:test": "cross-env NODE_ENV=test yarn typeorm:db:drop && cross-env NODE_ENV=test yarn typeorm:migration:run && cross-env NODE_ENV=test yarn typeorm:seed:run"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",

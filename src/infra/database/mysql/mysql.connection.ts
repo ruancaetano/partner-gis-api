@@ -14,7 +14,9 @@ class MysqlDatabase {
       return;
     }
 
-    await this._connection.connect();
+    await this._connection.connect().catch(() => {
+      process.exit(1)
+    });
   }
 
   async disconnect(): Promise<void> {
